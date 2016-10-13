@@ -240,6 +240,35 @@ function! s:InitTypes() abort
         \ 'union'  : 'u'
     \ }
     let s:known_types.c = type_c
+    " TTCN {{{3
+    let type_ttcn = s:TypeInfo.New()
+    let type_ttcn.kinds     = [
+        \ {'short' : 'g', 'long' : 'groups',      'fold' : 0, 'stl' : 1},
+        \ {'short' : 'm', 'long' : 'modules',     'fold' : 0, 'stl' : 1},
+        \ {'short' : 'p', 'long' : 'modulepar',   'fold' : 0, 'stl' : 1},
+        \ {'short' : 'P', 'long' : 'port',        'fold' : 0, 'stl' : 1},
+        \ {'short' : 'e', 'long' : 'testcase',    'fold' : 0, 'stl' : 1},
+        \ {'short' : 'f', 'long' : 'functions',   'fold' : 0, 'stl' : 1},
+        \ {'short' : 'C', 'long' : 'control',     'fold' : 0, 'stl' : 0},
+        \ {'short' : 't', 'long' : 'type',        'fold' : 0, 'stl' : 0},
+        \ {'short' : 'c', 'long' : 'const',       'fold' : 1, 'stl' : 0},
+        \ {'short' : 's', 'long' : 'signatures',  'fold' : 1, 'stl' : 0},
+        \ {'short' : 'a', 'long' : 'altstep',     'fold' : 1, 'stl' : 0},
+        \ {'short' : 'M', 'long' : 'member',      'fold' : 0, 'stl' : 1},
+        \ {'short' : 'E', 'long' : 'enum',        'fold' : 1, 'stl' : 1}
+    \ ]
+    let type_ttcn.sro        = '::'
+    let type_ttcn.kind2scope = {
+        \ 'E' : 'enum',
+        \ 'm' : 'module',
+        \ 'g' : 'group'
+    \ }
+    let type_ttcn.scope2kind = {
+        \ 'enum'      : 'E',
+        \ 'module'    : 'm',
+        \ 'group'     : 'g'
+    \ }
+    let s:known_types.ttcn = type_ttcn
     " C++ {{{3
     let type_cpp = s:TypeInfo.New()
     let type_cpp.ctagstype = 'c++'
